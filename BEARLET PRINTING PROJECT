@@ -1,0 +1,453 @@
+#include <iostream>
+#include <iomanip>
+#include <string>
+
+using namespace std;
+
+// FUNCTION WITH RETURN VALUE ( PRICE )
+
+double calcPrice(double paperPrice, int qty, int pages) 
+{
+    double price;
+	price = (paperPrice * qty * pages);
+    return price;
+}
+
+// FUNCTION WITH PARAMETER PASSING BY REFERENCE (PROMO CODE )
+
+void promotion(char promoCode, int pages, double &discount)
+{
+    if (promoCode == 'C' || promoCode == 'c')
+    {
+        if (pages >= 10 && pages <= 20)
+        {
+            discount = 0.1;
+        }
+        else if (pages > 20)
+        {
+            discount = 0.2;
+        }
+    }
+    else if (promoCode == 'B' || promoCode == 'b')
+    {
+        if (pages >= 30 && pages <= 50)
+        {
+            discount = 0.2;
+        }
+        else if (pages > 50)
+        {
+            discount = 0.3;
+        }
+    }
+    
+}
+
+//FUNCTION WITHOUT RETURN VALUE ( INVOICE RECEIPT )
+
+void invoiceReceipt(string custName, string custId, string custEmail, string paperSize, string inkColour, string paperMaterial, int paperGrams, double price, double discountprice, double priceAftDiscount, int customer)
+	{
+   	cout <<endl<< "|===============================================|"<<endl;
+		cout << "|             = INVOICE RECEIPT =               |"<<endl;
+		cout << "|===============================================|"<<endl;
+		cout << "|Name               |   "<<custName       <<"                 "<<endl;
+		cout << "|===============================================|"<<endl;
+		cout << "|ID number          |   "<<custId         <<"                 "<<endl;
+		cout << "|===============================================|"<<endl;
+		cout << "|Email              |   "<<custEmail      <<"                 "<<endl;
+		cout << "|===============================================|"<<endl;
+		cout << "|Paper Size         |   "<<paperSize      <<"                 "<<endl;
+		cout << "|===============================================|"<<endl;
+		cout << "|Inkstyle           |   "<<inkColour      <<"                 "<<endl;
+		cout << "|===============================================|"<<endl;
+		cout << "|Paper Material     |   "<< paperMaterial <<"                 "<<endl;
+		cout << "|===============================================|"<<endl;
+		cout << "|Paper Grams        |   "<< paperGrams    <<"                 "<<endl;
+		cout << "|===============================================|"<<endl;
+		cout << "|Price(RM)          |   " <<fixed << setprecision(2)<< price         <<"                 "<<endl;
+		cout << "|===============================================|"<<endl;
+		cout << "|Discount Price(RM) |   "<< fixed << setprecision(2) <<discountprice <<"                 "<<endl;
+		cout << "|===============================================|"<<endl;
+		cout << "|Final Price(RM)    |   " << fixed << setprecision(2)<< priceAftDiscount <<"                   "<<endl;
+		cout << "|===============================================|"<<endl;
+		cout << "\n\n\n\n"<< endl;
+		cout << "       ttttttttt  t     t ttttttt tt     t t       t     t      t   ttttttt  t     t    t   t                "<<endl;
+		cout << "           t      t     t t     t t t    t t      t       t    t    t     t  t     t    t   t                "<<endl;
+		cout << "           t      t     t t     t t  t   t t     t         t  t     t     t  t     t    t   t                "<<endl;
+		cout << "           t      ttttttt ttttttt t   t  t tttttt           t       t     t  t     t    t   t                "<<endl;
+		cout << "           t      t     t t     t t    t t t     t          t       t     t  t     t    t   t                "<<endl;
+		cout << "           t      t     t t     t t     tt t      t         t       t     t  t     t                         "<<endl;
+		cout << "           t      t     t t     t t      t t       t        t       ttttttt  ttttttt    t   t                "<<endl;
+		
+		cout << "\n\n\t\tPrinting In Process................................"<< endl;
+		cout << "\n\n\t\tPlease Wait Until Printing Complete................................"<< endl;
+		
+	}
+
+int main()
+{
+	
+		
+	//INITIALIZATION AND DECLARATION
+	
+	string custName, custId, custEmail ,paperSize, inkColour, paperMaterial,payType;
+	double paperGrams,paymentDiscount,RealPrice,finalPrice,price,paperPrice ,priceAftDiscount=0,discount=0,discountprice=0,totalPriceAftDiscount=0;
+	char repeat,option,promoCode,opt;
+	int qty,pages,customer,cust=0;
+	    
+	//ARRAY
+	
+	string paperSizes[2] = {"A3", "A4"};
+	string inkColours[2] = {"CL", "BW"};
+	string paperMaterials[2] = {"Colour", "Material"};
+	double paperPrices[9] = {2.00, 0.90, 0.80, 0.70, 0.60, 0.50, 0.40, 0.30, 0.20};
+	
+	//GREETINGS TO CUSTOMER
+	
+	
+	cout << "\n\n"<<endl;
+	cout << "    w     w    wwwwwww               "<<endl;
+	cout << "    w     w       w                  "<<endl;
+	cout << "    w     w       w                  "<<endl;
+	cout << "    wwwwwww       w                  "<<endl;
+	cout << "    w     w       w                  "<<endl;
+	cout << "    w     w       w                  "<<endl;
+	cout << "    w     w    wwwwwww               "<<endl;
+		
+	cout << " \n\n\n                          BBBBB   EEEEE  AAAAAA  RRRRRR   L      EEEEE TTTTTTTTT      "<<endl;
+	cout << "         @@@@@@@@@@       B    B  E      A    A  R     R  L      E         T         "<<endl;
+	cout << "         @@@@@@@@@@       B    B  E      A    A  R     R  L      E         T         "<<endl;
+	cout << "      @@@@@@@@@@@@@@@@    BBBBB   EEEEE  AAAAAA  RRRRRR   L      EEEEE     T         "<<endl;
+	cout << "      @              @    B    B  E      A    A  R     R  L      E         T         "<<endl;
+	cout << "      @              @    B    B  E      A    A  R     R  L      E         T         "<<endl;
+	cout << "      @@@@@@@@@@@@@@@@    BBBBB   EEEEE  A    A  R     R  LLLLLL EEEEE     T         "<<endl;
+	
+	//TABLE FOR CUSTOMER 
+		
+	cout <<"|==============|===========|====================|================|=============|"<<endl;
+	cout <<"|Paper Size    | Ink Style | Paper Material     |Paper Grams(gsm)|   Price(RM) |"<<endl;
+	cout <<"|==============|===========|====================|================|=============|"<<endl;
+	cout <<"|   A3         | CL-Colour |    Colour          | 70g            |  2.00       |"<<endl;
+	cout <<"|              |           |                    | 80g            |  0.90       |"<<endl;
+	cout <<"|              |           |====================|================|=============|"<<endl;
+	cout <<"|              |           |    Bond            | 70g            |  0.70       |"<<endl;
+	cout <<"|              |           |                    | 80g            |  0.80       |"<<endl;
+	cout <<"|==============|===========|====================|================|=============|"<<endl;
+	cout <<"|              | BW-Black  |    Colour          | 70g            |  0.60       |"<<endl;
+	cout <<"|              |And White  |                    | 80g            |  0.70       |"<<endl;
+	cout <<"|              |           |====================|================|=============|"<<endl;
+	cout <<"|              |           |    Bond            | 70g            |  0.50       |"<<endl;
+	cout <<"|              |           |                    | 80g            |  0.60       |"<<endl;
+	cout <<"|==============|===========|====================|================|=============|"<<endl;
+	cout <<"|   A4         | CL-Colour |    Colour          | 70g            |  0.50       |"<<endl;
+	cout <<"|              |           |                    | 80g            |  0.60       |"<<endl;
+	cout <<"|              |           |====================|================|=============|"<<endl;
+	cout <<"|              |           |    Bond            | 70g            |  0.40       |"<<endl;
+	cout <<"|              |           |                    | 80g            |  0.50       |"<<endl;
+	cout <<"|==============|===========|====================|================|=============|"<<endl;
+	cout <<"|              | BW-Black  |    Colour          | 70g            |  0.30       |"<<endl;
+	cout <<"|              |And White  |                    | 80g            |  0.40       |"<<endl;
+	cout <<"|              |           |====================|================|=============|"<<endl;
+	cout <<"|              |           |    Bond            | 70g            |  0.50       |"<<endl;
+	cout <<"|              |           |                    | 80g            |  0.20       |"<<endl;
+	cout <<"|==============|===========|====================|================|=============|"<<endl;
+	
+	//PROMPT USER
+	
+	cout << "\n\n\tDo you Want To Start Printing[Y/N]:  ";
+	cin >>option;
+	
+	//PROGRAM START
+	
+	if (option == 'Y' || option == 'y')
+	{
+		
+	//LOOPING
+		
+	do
+	{
+		cout << "\n\n\t\tPlease Connect Your Device Via Bluetooth ---------->" << endl;
+	
+	    cout << "\n\t\tPlease Enter Your Name: ";
+	    cin >> custName;
+	
+	    cout << "\n\t\tPlease Enter Your ID Card Number: ";
+	    cin >> custId;
+	
+	    cout << "\n\t\tPlease Enter Your Email Address: ";
+	    cin >> custEmail;
+		
+	    cout << "\n\t\tPlease Enter Paper Size [A3/A4]: ";
+	    cin >> paperSize;
+	    
+	    cout << "\n\t\tPlease Enter Ink Colour [CL /BW ]: ";
+	    cin >> inkColour;
+	
+	    cout << "\n\t\tPlease Enter Paper Material [ Colour/Bond ]: ";
+	    cin >> paperMaterial;
+	
+	    cout << "\n\t\tPlease Enter Paper Grams [ 70 / 80 ]: ";
+	    cin >> paperGrams;
+	
+		cout << "\n\t\tPlease Enter Quantity :";
+		cin >> qty;
+		
+		cout << "\n\t\tPlease Enter Pages :";
+		cin >> pages;
+		
+		// SELECTION
+			
+		if (paperSize == paperSizes[0]) 
+		{
+	        if (inkColour == inkColours[0]) 
+			{
+	            if (paperMaterial == paperMaterials[0]) 
+				{
+	                if (paperGrams == 70) 
+					{
+	                    price = calcPrice(paperPrices[0], qty,  pages);
+	                } 
+					else if (paperGrams == 80) 
+					{
+	                    price = calcPrice(paperPrices[1],  qty,  pages);
+	                }
+					else 
+					{
+	                	cout << "Invalid !! Please Enter Again" << endl;
+	                	return 0;
+	               	}
+	            }
+				else if (paperMaterial == paperMaterials[1]) 
+				{
+	                if (paperGrams == 70) 
+					{
+	                    price = calcPrice(paperPrices[3], qty, pages);
+	                }
+					else if (paperGrams == 80) 
+					{
+	                    price = calcPrice(paperPrices[2],  qty,  pages);
+	                } 
+					else 
+					{
+	                    cout << "Invalid !! Please Enter Again" << endl;
+	                    return 0;
+	                }
+	            }
+				else 
+				{
+	                cout << "Invalid !! Please Enter Again" << endl;
+	                return 0;
+	            }
+	        }
+			else if (inkColour == inkColours[1]) 
+			{
+	            if (paperMaterial == paperMaterials[0]) 
+				{
+	                if (paperGrams == 70) 
+					{
+	                	price = calcPrice(paperPrices[4],  qty,  pages);
+	                } 
+					else if (paperGrams == 80) 
+					{
+	                    price = calcPrice(paperPrices[3],  qty,  pages);
+	                } 
+					else 
+					{
+	                    cout << "Invalid !! Please Enter Again" << endl;
+	                    return 0;
+	                }
+	            }
+				else if (paperMaterial == paperMaterials[1]) 
+				{
+	                if (paperGrams == 70) 
+					{
+	                    price = calcPrice(paperPrices[5],  qty,  pages);
+	                } 
+					else if (paperGrams == 80) 
+					{
+	                    price = calcPrice(paperPrices[4],  qty,  pages);
+	                }
+					else 
+					{
+	                    cout << "Invalid !! Please Enter Again" << endl;
+	                    return 0;
+	                }
+	        	} 
+				else 
+				{
+	                cout << "Invalid !! Please Enter Again" << endl;
+	                return 0;
+	            }
+	        }
+	    }
+		else if (paperSize == paperSizes[1]) 
+		{
+	        if (inkColour == inkColours[0]) 
+			{
+	            if (paperMaterial == paperMaterials[0]) 
+				{
+	                if (paperGrams == 70) 
+					{
+	                    price = calcPrice(paperPrices[5],  qty, pages);
+	                } 
+					else if (paperGrams == 80) 
+					{
+	                    price = calcPrice(paperPrices[4], qty, pages);
+	                } 
+					else 
+					{
+	                    cout << "Invalid !! Please Enter Again" << endl;
+	                    return 0;
+	                }
+	            } 
+				else if (paperMaterial == paperMaterials[1]) 
+				{
+	            	if (paperGrams == 70) 
+					{
+	                    price = calcPrice(paperPrices[6],  qty,  pages);
+	                }
+					else if (paperGrams == 80) 
+					{
+	                    price = calcPrice(paperPrices[5], qty,  pages);
+	                }
+					else 
+					{
+	                    cout << "Invalid !! Please Enter Again" << endl;
+	                    return 0;
+	                }
+	            } 
+				else
+				{
+	            	cout << "Invalid !! Please Enter Again" << endl;
+	                return 0;
+	            }
+	        } 
+			else if (inkColour == inkColours[1])
+			{
+				if (paperMaterial == paperMaterials[0])
+				{
+	            	if (paperGrams == 70) 
+					{
+	                	price = calcPrice(paperPrices[7],  qty,  pages);
+	                } 
+					else if (paperGrams == 80) 
+					{
+	                    price = calcPrice(paperPrices[6],  qty,  pages);
+	                } 
+					else 
+					{
+	                    cout << "Invalid !! Please Enter Again" << endl;
+	                    return 0;
+	                }
+	            } 
+				else if (paperMaterial == paperMaterials[1]) 
+				{
+	                if (paperGrams == 70) 
+					{
+	                    price = calcPrice(paperPrices[5],  qty, pages);
+	                } 
+					else if (paperGrams == 80) 
+					{
+	                    price = calcPrice(paperPrices[8], qty, pages);
+	                } 	
+					else 
+					{
+	                    cout << "Invalid !! Please Enter Again" << endl;
+	                    return 0;
+	                }
+	            } 
+				else 
+				{
+	                cout << "Invalid !! Please Enter Again" << endl;
+	            	return 0;
+	            }  
+			}
+	        else 
+			{
+	            	cout << "Invalid !! Please Enter Again" << endl;
+	            return 0;
+	        }
+	    } 
+		else 
+		{
+	        cout << "Invalid !! Please Enter Again" << endl;
+	        return 0;
+	    }
+	    	
+	    //PROMPT USER FOR PROMO CODE
+	    
+		cout << "\n\t\tDo you have Any Promo Code?[ Y / N ] :";
+		cin >> opt;
+			
+		if (opt== 'Y'||opt == 'y')
+		{
+			cout << "\n\t\tPlease Enter Your Promo Code[ C /  B ] :";
+			cin >> promoCode;
+			
+		//CALL : FUNCTION WITH PARAMETER PASSING BY REFERENCE
+			
+	    	promotion(promoCode, pages, discount);
+		}
+			
+		//DISCOUNT FOR PAYMENT METHOD
+		
+		cout << "\n\t\tPlease Enter Payment Method[Cash /QR/Cashless]:";
+		cin >> payType;
+			
+		if (payType == "Cash"||payType == "cash")
+		{
+			paymentDiscount = 0.05;
+		}
+		else if(payType == "QR Code"||payType == "QR"||payType == "qr"||payType =="Cashless")
+		{
+			paymentDiscount = 0.08;
+		}
+		else 
+		{
+			cout << "Invalid !! Please Enter Again.";
+		}
+		
+		cust++;
+		
+		//CALCULATION
+		
+		discountprice = (price * discount)+(price*paymentDiscount);
+		priceAftDiscount = price - discountprice;
+		customer = cust;
+		
+		totalPriceAftDiscount = totalPriceAftDiscount + priceAftDiscount;
+		
+		
+		//CALL : FUNCTION WITHOUT RETURN VALUE ( INVOICE RECEIPT )
+		
+		invoiceReceipt(custName, custId, custEmail, paperSize, inkColour, paperMaterial, paperGrams, price, discountprice, priceAftDiscount, customer);
+		
+		
+	
+		
+		
+		
+		cout << "\n\n\tDo you Want To Start Printing[Y/N]:  ";
+		cin >>option;
+	}
+	
+	while (option == 'Y' || option == 'y');
+	
+	}
+	
+	//PROGRAM TERMINATED
+	
+	else 
+	{
+		cout << "\n\nPlease enter again to start printing!!"<<endl;
+	}
+	
+	//TOTAL CUSTOMERS OF THE DAY 
+	
+	cout << "\n\nTotal Customer for  today  : "<< customer << endl;
+	
+	//TOTAL PRICE AFTER DISCOUNT OF THE DAY
+	
+	cout << "\nTotal Price After Discount : RM" << totalPriceAftDiscount << endl;
+	
+	return 0;
+}
